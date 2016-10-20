@@ -1,7 +1,9 @@
 package com.openworldtravels.www.hypertension;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,8 +49,31 @@ public class SignUpActivity extends AppCompatActivity {
             } // onClick
         });
 
+        //Image Controller
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent.createChooser(intent, "โปรเลือกรูปภาพ"), 0);
+
+
+            }// onCLick Image
+        });
+
     } // Main Method
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if ((requestCode == 0) && (resultCode == RESULT_OK)) {
+
+            Log.d("20octV1", "Result ==> OK");
+
+        }// if
+
+    }// onActivity
 
 }// Main Class
