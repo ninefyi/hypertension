@@ -114,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             //Upload String
             AddUser addUser = new AddUser(SignUpActivity.this);
-            addUser.execute(myConstant.getUrlJSON());
+            addUser.execute(myConstant.getUrlJSONString());
 
 
         } catch (Exception e) {

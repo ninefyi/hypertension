@@ -12,9 +12,7 @@ import io.netpie.microgear.Microgear;
 
 public class MainActivity extends AppCompatActivity {
     private final Microgear microgear = new Microgear(this);
-    private String appid = "Hypertension"; //APP_ID
-    private String key = "hCOs4P1PsSaANgY"; //KEY
-    private String secret = "Ztt2nX3O2CwobnKszSv1B5vqg"; //SECRET
+    private String appString, keyString, secretString;
 
 
 
@@ -35,7 +33,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         NetpieIOHelper callback = new NetpieIOHelper(handler);
-        microgear.connect(appid, key, secret);
+
+        MyConstant myConstant = new MyConstant();
+        appString = myConstant.getAppString();
+        keyString = myConstant.getKeyString();
+        secretString = myConstant.getSecretString();
+
+        microgear.connect(appString, keyString, secretString);
         microgear.setCallback(callback);
         microgear.subscribe("patient1");
         microgear.setalias("android1");
