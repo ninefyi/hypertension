@@ -12,7 +12,7 @@
     tools:context="com.openworldtravels.www.hypertension.SignUpActivity">
 
     <TextView
-        android:text="Sign Up"
+        android:text="@string/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
