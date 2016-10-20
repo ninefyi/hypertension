@@ -9,10 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class FirstActivity extends AppCompatActivity {
 
@@ -73,6 +77,9 @@ public class FirstActivity extends AppCompatActivity {
 
         //Explicit
         private Context context;
+        private String[] imageStrings, nameStrings;
+        private boolean aBoolean = true;
+        private String truePasswordString;
 
         public SyncUser(Context context) {
             this.context = context;
@@ -101,6 +108,52 @@ public class FirstActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             Log.d("20octV2", "JSON ==> " + s);
+
+            try {
+
+                JSONArray jsonArray = new JSONArray(s);
+                imageStrings = new String[jsonArray.length()];
+                nameStrings = new String[jsonArray.length()];
+
+                for (int i=0;i<jsonArray.length();i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    //setup for Array
+                    imageStrings[i] = jsonObject.getString("image");
+                    nameStrings[i] = jsonObject.getString("name");
+
+                    //check user
+                    if (userString.equals(jsonObject.getString("user"))) {
+                        aBoolean = false;
+                        truePasswordString = jsonObject.getString("password");
+                    }// if
+
+                }// for
+
+                if (aBoolean) {
+                    //User False
+                    MyAlert myAlert = new MyAlert(context, "User Failed", "ไม่พบ " + userString + " ในฐานข้อมูล!!!!");
+                    myAlert.myDialog();
+                }else if(!passwordString.equals(truePasswordString)){
+                    //Password False
+                    MyAlert myAlert = new MyAlert(context, "Password Failed", "รหัสผ่านไม่ถูกต้อง!!!!");
+                    myAlert.myDialog();
+                } else{
+                    //Pass True
+                    Toast.makeText(context, "ยินดีต้อนรับ", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(FirstActivity.this, ServiceActivity.class);
+                    intent.putExtra("image", imageStrings);
+                    intent.putExtra("name", nameStrings);
+                    startActivity(intent);
+                    finish();
+
+                }// if
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            } // Try
 
         }// onPost
     } //SyncUser

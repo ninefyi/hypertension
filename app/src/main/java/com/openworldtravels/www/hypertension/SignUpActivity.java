@@ -143,7 +143,7 @@ public class SignUpActivity extends AppCompatActivity {
                         .add("user", userString)
                         .add("password", passwordString)
                         .add("name", nameString)
-                        .add("image", nameImageString)
+                        .add("image", imagePathString)
                         .build();
 
                 Request.Builder builder = new Request.Builder();
