@@ -12,18 +12,20 @@ import android.widget.Button;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private Button emergency​Button, logoutButton;
+    private Button emergency​Button, logoutButton, profileButton;
+    private String jsonString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        String jsonString = getIntent().getStringExtra("jsondata");
+        jsonString = getIntent().getStringExtra("jsondata");
         //Log.d("22octMainMenu", jsonString);
 
         emergency​Button = (Button) findViewById(R.id.btnEmergency);
         logoutButton = (Button) findViewById(R.id.btnLogout);
+        profileButton = (Button) findViewById(R.id.btnPatient);
 
 
         emergency​Button.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +41,26 @@ public class MainMenuActivity extends AppCompatActivity {
                 logoutClick();
             }
         });
+
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profileClick();
+
+            }
+        });
+
+    }
+
+    private void profileClick() {
+        try {
+            Intent proflePage = new Intent(MainMenuActivity.this, ProfileActivity.class);
+            proflePage.putExtra("jsondata", jsonString);
+            startActivity(proflePage);
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

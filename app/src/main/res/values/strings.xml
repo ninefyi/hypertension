@@ -12,4 +12,13 @@
     <string name="title_chat">คุยกับพยาบาล</string>
     <string name="title_report">ดูรายงาน</string>
     <string name="title_logout">ออกจากระบบ</string>
+    <string name="title_name">ชื่อ-นามสกุล</string>
+    <string name="title_bod">วัน-เดือน-ปีเกิด</string>
+    <string name="title_height">ส่วนสูง</string>
+    <string name="title_weight">น้ำหนัก</string>
+    <string name="title_allergy">ประวัติการแพ้ยา</string>
+    <string name="title_breakfast">เวลาเช้า</string>
+    <string name="title_lunch">เวลากลางวัน</string>
+    <string name="title_dinner">เวลาเย็น</string>
+    <string name="title_main">กลับสู่หน้าหลัก</string>
 </resources>
