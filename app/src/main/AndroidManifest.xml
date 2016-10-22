@@ -28,7 +28,8 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".ServiceActivity" />
         <activity android:name=".FirstActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".MedicineDetailActivity"></activity>
     </application>
 
 </manifest>

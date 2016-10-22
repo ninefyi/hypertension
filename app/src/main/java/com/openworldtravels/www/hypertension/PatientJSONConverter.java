@@ -33,6 +33,7 @@ public class PatientJSONConverter {
                 this.allergyString = jsonObject.getString("patient_allergy");
                 this.bodString = jsonObject.getString("patient_bod");
                 this.phoneString = jsonObject.getString("patient_phone");
+                this.idString = jsonObject.getString("patient_id");
             }
         }catch (Exception e){
             e.printStackTrace();
