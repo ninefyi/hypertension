@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -96,12 +97,13 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
-     if (s.length() < 4) {
+                if (s.length() < 4) {
                     Toast.makeText(context, "ชื่อผู้ใช้และรหัสผ่านไม่ถูกต้อง!", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(context, "ยินดีต้อนรับเข้าสู่ระบบ", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
-                    intent.putExtra("jsondata", s.trim());
+                    String jsonString = s.trim();
+                    intent.putExtra("jsondata",jsonString);
                     startActivity(intent);
                     finish();
                 }

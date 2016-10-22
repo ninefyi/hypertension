@@ -6,4 +6,10 @@
     <string name="title">ระบบช่วยเหลือผู้ป่วยโรคความดันโลหิตสูง</string>
     <string name="title_user">ชื่อผู้ใช้</string>
     <string name="title_password">รหัสผ่าน</string>
+    <string name="title_personal">ดูข้อมูลส่วนตัว</string>
+    <string name="title_drug">แสดงข้อมูลยา</string>
+    <string name="title_emergency">โทรฉุกเฉิน</string>
+    <string name="title_chat">คุยกับพยาบาล</string>
+    <string name="title_report">ดูรายงาน</string>
+    <string name="title_logout">ออกจากระบบ</string>
 </resources>
