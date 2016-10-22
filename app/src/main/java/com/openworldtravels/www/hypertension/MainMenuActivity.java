@@ -12,7 +12,7 @@ import android.widget.Button;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private Button emergency​Button, logoutButton, profileButton;
+    private Button emergency​Button, logoutButton, profileButton, medicineButton;
     private String jsonString;
 
     @Override
@@ -26,6 +26,7 @@ public class MainMenuActivity extends AppCompatActivity {
         emergency​Button = (Button) findViewById(R.id.btnEmergency);
         logoutButton = (Button) findViewById(R.id.btnLogout);
         profileButton = (Button) findViewById(R.id.btnPatient);
+        medicineButton = (Button) findViewById(R.id.btnMedicine);
 
 
         emergency​Button.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +51,26 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        medicineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                medicineClick();
+            }
+        });
+
+
+
+    }
+
+    private void medicineClick() {
+        try {
+            Intent intent = new Intent(MainMenuActivity.this, MedicineMainActivity.class);
+            intent.putExtra("jsondata", jsonString);
+            startActivity(intent);
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void profileClick() {

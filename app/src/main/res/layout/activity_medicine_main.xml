@@ -9,4 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.openworldtravels.www.hypertension.MedicineMainActivity">
 
+    <Button
+        android:text="@string/title_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnMain"
+        android:layout_alignParentBottom="true"
+        android:textStyle="normal|bold"
+        android:textSize="24sp" />
 </RelativeLayout>
