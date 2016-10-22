@@ -23,4 +23,6 @@
     <string name="title_main">กลับสู่หน้าหลัก</string>
     <string name="med_brand">ชื่อทางการค้า</string>
     <string name="med_name">ชื่อยา</string>
+    <string name="med_charactor">คุณสมบัติ</string>
+    <string name="med_affect">ผลข้างเคียง</string>
 </resources>

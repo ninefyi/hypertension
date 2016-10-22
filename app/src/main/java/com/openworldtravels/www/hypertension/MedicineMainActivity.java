@@ -46,10 +46,9 @@ public class MedicineMainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 Intent intent = new Intent(MedicineMainActivity.this, MedicineDetailActivity.class);
                 intent.putExtra("data", medicines[i]);
-
+                startActivity(intent);
             }// onItemCLick
         });// onItemClick
 
