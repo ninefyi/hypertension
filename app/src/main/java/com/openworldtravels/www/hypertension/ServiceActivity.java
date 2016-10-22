@@ -33,6 +33,7 @@ public class ServiceActivity extends AppCompatActivity {
                 MyAlert myAlert = new MyAlert(ServiceActivity.this, nameStrings[i], "รายละเอียด");
                 myAlert.myDialog();
 
+
             }// onItemCLick
         });// onItemClick
 

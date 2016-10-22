@@ -2,4 +2,8 @@
     <string name="app_name">Hypertension</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="signup">สมัครสมาชิก</string>
+    <string name="login">เข้าสู่ระบบ</string>
+    <string name="title">ระบบช่วยเหลือผู้ป่วยโรคความดันโลหิตสูง</string>
+    <string name="title_user">ชื่อผู้ใช้</string>
+    <string name="title_password">รหัสผ่าน</string>
 </resources>
