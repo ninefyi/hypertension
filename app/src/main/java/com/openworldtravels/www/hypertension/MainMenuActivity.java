@@ -12,7 +12,6 @@ import android.widget.Button;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private Button emergency​Button, logoutButton, profileButton, medicineButton;
     private String jsonString;
 
     @Override
@@ -23,10 +22,11 @@ public class MainMenuActivity extends AppCompatActivity {
         jsonString = getIntent().getStringExtra("jsondata");
         //Log.d("22octMainMenu", jsonString);
 
-        emergency​Button = (Button) findViewById(R.id.btnEmergency);
-        logoutButton = (Button) findViewById(R.id.btnLogout);
-        profileButton = (Button) findViewById(R.id.btnPatient);
-        medicineButton = (Button) findViewById(R.id.btnMedicine);
+        Button emergency​Button = (Button) findViewById(R.id.btnEmergency);
+        Button logoutButton = (Button) findViewById(R.id.btnLogout);
+        Button profileButton = (Button) findViewById(R.id.btnPatient);
+        Button medicineButton = (Button) findViewById(R.id.btnMedicine);
+        Button chatButton = (Button) findViewById(R.id.btnNurse);
 
 
         emergency​Button.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +58,26 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        chatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chatClick();
+            }
+        });
 
 
+
+    }
+
+    private void chatClick() {
+        try {
+            Intent intent = new Intent(MainMenuActivity.this, ChatActivity.class);
+            intent.putExtra("jsondata", jsonString);
+            startActivity(intent);
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void medicineClick() {
@@ -67,7 +85,6 @@ public class MainMenuActivity extends AppCompatActivity {
             Intent intent = new Intent(MainMenuActivity.this, MedicineMainActivity.class);
             intent.putExtra("jsondata", jsonString);
             startActivity(intent);
-            finish();
         } catch (Exception e) {
             e.printStackTrace();
         }

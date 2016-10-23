@@ -29,7 +29,8 @@
         <activity android:name=".ServiceActivity" />
         <activity android:name=".FirstActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".MedicineDetailActivity"></activity>
+        <activity android:name=".MedicineDetailActivity" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>
