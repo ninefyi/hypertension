@@ -1,6 +1,8 @@
 package com.openworldtravels.www.hypertension;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -112,8 +114,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void callPhone() {
         try {
-            Intent phone_call = new Intent(Intent.ACTION_CALL);
-            phone_call.setData(Uri.parse("tel:095-6982250"));
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -122,12 +122,43 @@ public class MainMenuActivity extends AppCompatActivity {
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
+
+
+                if (!ActivityCompat.shouldShowRequestPermissionRationale(MainMenuActivity.this,
+                        Manifest.permission.CALL_PHONE)) {
+                    showMessageOKCancel("ขออนุญาตใช้โทรศัพท์่โทรหาพยาบาลนะค่ะ!",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ActivityCompat.requestPermissions(MainMenuActivity.this,
+                                            new String[] {Manifest.permission.CALL_PHONE},
+                                            123);
+                                }
+                            });
+                    return;
+                }
+                ActivityCompat.requestPermissions(MainMenuActivity.this,
+                        new String[] {Manifest.permission.CALL_PHONE},
+                        123);
+
                 return;
             }
+            Intent phone_call = new Intent(Intent.ACTION_CALL);
+            phone_call.setData(Uri.parse("tel:0886494888"));
+            phone_call.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(phone_call);
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(MainMenuActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 
 

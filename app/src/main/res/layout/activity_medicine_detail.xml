@@ -29,7 +29,8 @@
                 app:srcCompat="@drawable/no_image"
                 android:id="@+id/imageView3"
                 android:layout_alignParentTop="true"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scrollbars="vertical" />
         </LinearLayout>
 
         <LinearLayout
