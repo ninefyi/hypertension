@@ -37,14 +37,16 @@ public class MyAlert {
 
     }// myDialog Method
 
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+    public void showMessageOKCancel(DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(context)
-                .setMessage(message)
+                .setIcon(R.drawable.nobita48)
+                .setTitle(titleString)
+                .setMessage(messageString)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", null)
                 .create()
                 .show();
-    }
+    }// ShowMessageOKCancel
 
 
 } // Main class

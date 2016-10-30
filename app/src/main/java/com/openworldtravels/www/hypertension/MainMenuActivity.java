@@ -1,7 +1,6 @@
 package com.openworldtravels.www.hypertension;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -123,10 +122,12 @@ public class MainMenuActivity extends AppCompatActivity {
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
 
+                MyAlert myAlert = new MyAlert(MainMenuActivity.this, "Hypertension", "ขออนุญาตใช้โทรศัพท์่โทรหาพยาบาลนะค่ะ!");
+
 
                 if (!ActivityCompat.shouldShowRequestPermissionRationale(MainMenuActivity.this,
                         Manifest.permission.CALL_PHONE)) {
-                    showMessageOKCancel("ขออนุญาตใช้โทรศัพท์่โทรหาพยาบาลนะค่ะ!",
+                        myAlert.showMessageOKCancel(
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -152,14 +153,6 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(MainMenuActivity.this)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
-    }
 
 
 }
