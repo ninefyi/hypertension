@@ -20,6 +20,7 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,7 +32,24 @@
         <activity android:name=".FirstActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MedicineDetailActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
+
+        <service
+            android:name=".MyAlarmService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".MyAlarmReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".MyNotificationService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

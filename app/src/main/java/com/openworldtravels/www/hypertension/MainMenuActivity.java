@@ -1,19 +1,28 @@
 package com.openworldtravels.www.hypertension;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
 public class MainMenuActivity extends AppCompatActivity {
 
-    private String jsonString;
+    private String jsonString, idString;
+    private PatientJSONConverter patientJSONConverter;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +30,13 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         jsonString = getIntent().getStringExtra("jsondata");
+        patientJSONConverter = new PatientJSONConverter(jsonString);
+        idString = patientJSONConverter.getIdString();
         //Log.d("22octMainMenu", jsonString);
+
+        MyConstant myConstant = new MyConstant();
+        LoadMedTime loadMedTime = new LoadMedTime(MainMenuActivity.this);
+        loadMedTime.execute(myConstant.getUrlAPI());
 
         Button emergency​Button = (Button) findViewById(R.id.btnEmergency);
         Button logoutButton = (Button) findViewById(R.id.btnLogout);
@@ -150,6 +165,54 @@ public class MainMenuActivity extends AppCompatActivity {
             startActivity(phone_call);
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    //Inner class
+    public class LoadMedTime extends AsyncTask<String, Void, String> {
+
+        //Explicit
+        private Context context;
+
+        public LoadMedTime(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+                RequestBody requestBody = new FormEncodingBuilder()
+                        .add("patient", idString)
+                        .add("op", "take_med")
+                        .build();
+
+                Request.Builder builder = new Request.Builder();
+                Request request = builder.url(strings[0]).post(requestBody).build();
+                Response response = okHttpClient.newCall(request).execute();
+                return response.body().string();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }// Try
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                //Log.d("31oct", s);
+                if (s.length() > 4) {
+                    String jsonString = s.trim();
+                    Intent myServiceIntent = new Intent(MainMenuActivity.this, MyAlarmService.class);
+                    myServiceIntent.putExtra("jsondata", jsonString);
+                    startService(myServiceIntent);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } // Try
         }
     }
 
