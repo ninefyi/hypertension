@@ -38,14 +38,16 @@
             android:ems="10"
             android:id="@+id/messageEditText"
             android:layout_weight="1"
-            android:hint="@string/message" />
+            android:hint="@string/message"
+            android:textSize="24sp" />
 
         <Button
             android:text="@string/send_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sendButton"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:textSize="24sp" />
 
     </LinearLayout>
 

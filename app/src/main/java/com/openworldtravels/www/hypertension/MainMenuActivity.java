@@ -89,7 +89,7 @@ public class MainMenuActivity extends AppCompatActivity {
             Intent intent = new Intent(MainMenuActivity.this, ChatActivity.class);
             intent.putExtra("jsondata", jsonString);
             startActivity(intent);
-            finish();
+            //finish();
         } catch (Exception e) {
             e.printStackTrace();
         }
