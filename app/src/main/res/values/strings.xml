@@ -27,4 +27,5 @@
     <string name="med_affect">ผลข้างเคียง</string>
     <string name="message">พิมพ์ข้อความ</string>
     <string name="send_message">ส่งข้อความ</string>
+    <string name="remember_login">จำข้อมูล</string>
 </resources>

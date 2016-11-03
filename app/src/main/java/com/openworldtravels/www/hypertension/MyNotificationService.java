@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 
 
 public class MyNotificationService extends IntentService {
@@ -35,21 +36,30 @@ public class MyNotificationService extends IntentService {
         if (soundUri == null) {
             soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         }
-        String msg = "ได้เวลาทานยาแล้วค่ะ!";
-        Intent yesReceive = new Intent(getApplicationContext(), ChatActivity.class);
-        yesReceive.setAction("YES");
-        yesReceive.putExtra("jsondata", jsonString);
-        PendingIntent pendingIntentYes = PendingIntent.getActivity(this, 12345, yesReceive, PendingIntent.FLAG_UPDATE_CURRENT);
+        String title = "ได้เวลาทานยาแล้วค่ะ!";
+        String msg = "แตะเพื่อตอบว่าทานยาแล้ว!";
+        Intent yesIntent = new Intent(getApplicationContext(), ChatActivity.class);
+        yesIntent.setAction("YES");
+        yesIntent.putExtra("jsondata", jsonString);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(MyNotificationService.this);
+        stackBuilder.addParentStack(ChatActivity.class);
+        stackBuilder.addNextIntent(yesIntent);
+
+        PendingIntent contentIntent = stackBuilder.getPendingIntent(0,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
         notification =
-            new NotificationCompat.Builder(this) // this is context
-                    .setSmallIcon(R.drawable.nobita48)
-                    .setContentTitle("Hypertension")
+            new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle(title)
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                     .setContentText(msg)
                     .setSound(soundUri)
                     .setAutoCancel(true)
-                    .addAction(new NotificationCompat.Action(R.mipmap.ic_launcher, "ทานแล้ว", pendingIntentYes))
+                    .setContentIntent(contentIntent)
                     .build();
+
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

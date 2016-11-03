@@ -24,7 +24,8 @@
             android:ems="10"
             android:id="@+id/userEditText"
             android:layout_margin="20dp"
-            android:hint="@string/title_user" />
+            android:hint="@string/title_user"
+            android:textSize="24sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -33,7 +34,16 @@
             android:ems="10"
             android:id="@+id/passwordEditText"
             android:layout_margin="20dp"
-            android:hint="@string/title_password" />
+            android:hint="@string/title_password"
+            android:textSize="24sp" />
+
+        <CheckBox
+            android:text="@string/remember_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rememberCheckBox"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
     </LinearLayout>
 
     <Button
@@ -52,5 +62,7 @@
         android:id="@+id/textView3"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_alignParentBottom="false"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
 </RelativeLayout>
