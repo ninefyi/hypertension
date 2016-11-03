@@ -205,9 +205,10 @@ public class MainMenuActivity extends AppCompatActivity {
             try {
                 //Log.d("31oct", s);
                 if (s.length() > 4) {
-                    String jsonString = s.trim();
+                    String medString = s.trim();
                     Intent myServiceIntent = new Intent(MainMenuActivity.this, MyAlarmService.class);
                     myServiceIntent.putExtra("jsondata", jsonString);
+                    myServiceIntent.putExtra("schedule", medString);
                     startService(myServiceIntent);
                 }
             } catch (Exception e) {

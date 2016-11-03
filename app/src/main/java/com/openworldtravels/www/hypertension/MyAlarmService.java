@@ -11,7 +11,7 @@ import java.util.Calendar;
 
 public class MyAlarmService extends IntentService {
 
-    private String jsonString;
+    private String jsonString, scheduleString;
 
     public MyAlarmService() {
         super("MyAlarmService");
@@ -21,6 +21,7 @@ public class MyAlarmService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             jsonString = intent.getStringExtra("jsondata");
+            scheduleString = intent.getStringExtra("schedule");
             setScheduleAlarm();
         }
     }
@@ -29,11 +30,13 @@ public class MyAlarmService extends IntentService {
         Calendar calendar = Calendar.getInstance();
         Intent intent = new Intent(getApplicationContext(), MyAlarmReceiver.class);
         intent.putExtra("jsondata", jsonString);
-        final PendingIntent pIntent = PendingIntent.getBroadcast(MyAlarmService.this, MyAlarmReceiver.REQUEST_CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        final PendingIntent pIntent = PendingIntent.getBroadcast(MyAlarmService.this
+                                    , MyAlarmReceiver.REQUEST_CODE
+                                    , intent
+                                    , PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), 1*60*1000, pIntent);
+                calendar.getTimeInMillis(), 5*60*1000, pIntent);
     }
 
 

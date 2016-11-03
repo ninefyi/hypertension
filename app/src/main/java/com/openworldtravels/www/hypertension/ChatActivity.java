@@ -62,6 +62,16 @@ public class ChatActivity extends AppCompatActivity {
         patientJSONConverter = new PatientJSONConverter(jsonString);
         topicString = topicString + patientJSONConverter.getIdString();
 
+        String actionString = getIntent().getAction();
+        if(actionString != null) {
+            if (actionString.equals("YES")) {
+                //Log.d("Notificaiton", jsonString);
+                messageString = "ทานเรียบร้อยแล้ว^^";
+                SendMessageTask sendMessageTask = new SendMessageTask(ChatActivity.this);
+                sendMessageTask.execute(myConstant.getUrlAPI());
+            }
+        }
+
         listView = (ListView) findViewById(R.id.chatListView);
         Button chatButton = (Button) findViewById(R.id.sendButton);
         editText = (EditText) findViewById(R.id.messageEditText);
@@ -217,6 +227,20 @@ public class ChatActivity extends AppCompatActivity {
             } // Try
         }
     }//Inner class
+
+    //ScheduleTask
+    public class ScheduleTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
+
 
     public void refreshMessage(){
         try {

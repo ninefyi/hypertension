@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 
 public class MyNotificationService extends IntentService {
@@ -25,7 +24,7 @@ public class MyNotificationService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             jsonString = intent.getStringExtra("jsondata");
-            Log.d("31oct", jsonString);
+            //Log.d("31oct", jsonString);
             createNotification("hello");
             MyAlarmReceiver.completeWakefulIntent(intent);
         }
@@ -37,9 +36,10 @@ public class MyNotificationService extends IntentService {
             soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         }
         String msg = "ได้เวลาทานยาแล้วค่ะ!";
-        Intent yesReceive = new Intent();
+        Intent yesReceive = new Intent(getApplicationContext(), ChatActivity.class);
         yesReceive.setAction("YES");
-        PendingIntent pendingIntentYes = PendingIntent.getBroadcast(this, 12345, yesReceive, PendingIntent.FLAG_UPDATE_CURRENT);
+        yesReceive.putExtra("jsondata", jsonString);
+        PendingIntent pendingIntentYes = PendingIntent.getActivity(this, 12345, yesReceive, PendingIntent.FLAG_UPDATE_CURRENT);
         notification =
             new NotificationCompat.Builder(this) // this is context
                     .setSmallIcon(R.drawable.nobita48)

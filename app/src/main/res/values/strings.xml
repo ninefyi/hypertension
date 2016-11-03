@@ -25,6 +25,6 @@
     <string name="med_name">ชื่อยา</string>
     <string name="med_charactor">คุณสมบัติ</string>
     <string name="med_affect">ผลข้างเคียง</string>
-    <string name="message">ข้อความสนทนา</string>
+    <string name="message">พิมพ์ข้อความ</string>
     <string name="send_message">ส่งข้อความ</string>
 </resources>

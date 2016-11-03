@@ -28,9 +28,7 @@
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".MedicineMainActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".SignUpActivity" />
         <activity android:name=".ServiceActivity" />
-        <activity android:name=".FirstActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MedicineDetailActivity" />
         <activity android:name=".ChatActivity" />
