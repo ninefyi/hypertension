@@ -22,10 +22,10 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile project(':microgear')
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
     compile files('libs/simpleftp.jar')
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile files('libs/picasso-2.5.2.jar')
+    compile 'io.netpie:microgear:1.0.3'
 }

@@ -76,17 +76,20 @@ public class ChatActivity extends AppCompatActivity {
         Button chatButton = (Button) findViewById(R.id.sendButton);
         editText = (EditText) findViewById(R.id.messageEditText);
 
-        NetpieIOHelper callback = new NetpieIOHelper(handler);
-
         final MyConstant myConstant = new MyConstant();
         appString = myConstant.getAppString();
         keyString = myConstant.getKeyString();
         secretString = myConstant.getSecretString();
 
-        microgear.connect(appString, keyString, secretString);
-        microgear.setCallback(callback);
-        microgear.subscribe(topicString);
-        microgear.setalias("android" + patientJSONConverter.getIdString());
+        try {
+            NetpieIOHelper callback = new NetpieIOHelper(handler);
+            microgear.connect(appString, keyString, secretString);
+            microgear.setCallback(callback);
+            microgear.subscribe(topicString);
+            microgear.setalias("android" + patientJSONConverter.getIdString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         refreshMessage();
 

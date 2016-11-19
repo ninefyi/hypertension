@@ -36,7 +36,7 @@ public class MyAlarmService extends IntentService {
                                     , PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), 5*60*1000, pIntent);
+                calendar.getTimeInMillis(), 1*60*1000, pIntent);
     }
 
 

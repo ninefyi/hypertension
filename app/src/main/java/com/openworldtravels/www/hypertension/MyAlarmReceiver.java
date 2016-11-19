@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.util.Log;
 
 public class MyAlarmReceiver extends WakefulBroadcastReceiver {
 
@@ -16,6 +17,7 @@ public class MyAlarmReceiver extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d("Alarm", "hello again");
         jsonString = intent.getStringExtra("jsondata");
         Intent myService = new Intent(context, MyNotificationService.class);
         myService.putExtra("jsondata", jsonString);

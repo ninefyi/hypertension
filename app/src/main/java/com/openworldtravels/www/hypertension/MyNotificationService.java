@@ -56,7 +56,7 @@ public class MyNotificationService extends IntentService {
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                     .setContentText(msg)
                     .setSound(soundUri)
-                    .setAutoCancel(true)
+                    //.setAutoCancel(true)
                     .setContentIntent(contentIntent)
                     .build();
 
