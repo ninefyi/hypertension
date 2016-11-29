@@ -5,6 +5,7 @@ import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -22,6 +23,7 @@ public class MyAlarmService extends IntentService {
         if (intent != null) {
             jsonString = intent.getStringExtra("jsondata");
             scheduleString = intent.getStringExtra("schedule");
+            Log.d("Schedule:", scheduleString);
             setScheduleAlarm();
         }
     }
@@ -30,6 +32,7 @@ public class MyAlarmService extends IntentService {
         Calendar calendar = Calendar.getInstance();
         Intent intent = new Intent(getApplicationContext(), MyAlarmReceiver.class);
         intent.putExtra("jsondata", jsonString);
+        intent.putExtra("schedule", scheduleString);
         final PendingIntent pIntent = PendingIntent.getBroadcast(MyAlarmService.this
                                     , MyAlarmReceiver.REQUEST_CODE
                                     , intent

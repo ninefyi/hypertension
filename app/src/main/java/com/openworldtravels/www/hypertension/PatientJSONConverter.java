@@ -17,6 +17,14 @@ public class PatientJSONConverter {
         this.execute();
     }
 
+    private String convertToTimePattern(String value){
+        if(value.equals("")){
+            return value;
+        }else{
+            return value.substring(0, 2) + ":" + value.substring(2, 4);
+        }
+    }
+
     public void execute(){
         try{
             JSONArray jsonArray = new JSONArray(jsonString);
@@ -105,11 +113,7 @@ public class PatientJSONConverter {
     }
 
     public String getBreakfastString() {
-        if(breakfastString.equals("")){
-            return breakfastString;
-        }else{
-            return breakfastString.substring(0, 2) + ":" + breakfastString.substring(2, 4);
-        }
+        return convertToTimePattern(this.breakfastString);
     }
 
     public void setBreakfastString(String breakfastString) {
@@ -117,11 +121,7 @@ public class PatientJSONConverter {
     }
 
     public String getLunchString() {
-        if(lunchString.equals("")){
-            return lunchString;
-        }else{
-            return lunchString.substring(0, 2) + ":" + lunchString.substring(2, 4);
-        }
+        return convertToTimePattern(this.lunchString);
     }
 
     public void setLunchString(String lunchString) {
@@ -129,11 +129,7 @@ public class PatientJSONConverter {
     }
 
     public String getDinnerString() {
-        if(dinnerString.equals("")){
-            return dinnerString;
-        }else{
-            return dinnerString.substring(0, 2) + ":" + dinnerString.substring(2, 4);
-        }
+        return convertToTimePattern(this.dinnerString);
     }
 
     public void setDinnerString(String dinnerString) {
@@ -154,5 +150,17 @@ public class PatientJSONConverter {
 
     public void setNameString(String nameString) {
         this.nameString = nameString;
+    }
+
+    public String getRealBreakfastString(){
+        return breakfastString;
+    }
+
+    public String getRealLunchString(){
+        return lunchString;
+    }
+
+    public String getRealDinnerString(){
+        return dinnerString;
     }
 }
