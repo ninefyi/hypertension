@@ -15,7 +15,7 @@ import android.support.v4.app.TaskStackBuilder;
 
 public class MyNotificationService extends IntentService {
 
-    private String jsonString;
+    private String jsonString, medBrandString;
     private int NOTIFICATION_ID = 1000;
     private Notification notification;
 
@@ -27,6 +27,7 @@ public class MyNotificationService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             jsonString = intent.getStringExtra("jsondata");
+            medBrandString = intent.getStringExtra("medbrand");
             //Log.d("31oct", jsonString);
 
             createNotification("hello");
@@ -39,7 +40,7 @@ public class MyNotificationService extends IntentService {
         if (soundUri == null) {
             soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         }
-        String title = "ได้เวลาทานยาแล้วค่ะ!";
+        String title = "ได้เวลาทานยา " + medBrandString +" แล้วค่ะ!";
         String msg = "แตะเพื่อตอบว่าทานยาแล้ว!";
         Intent yesIntent = new Intent(getApplicationContext(), ChatActivity.class);
         yesIntent.setAction("YES");

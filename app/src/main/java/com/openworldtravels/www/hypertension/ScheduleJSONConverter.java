@@ -10,41 +10,41 @@ import org.json.JSONObject;
 public class ScheduleJSONConverter {
 
     private String jsonString;
+    private Schedule[] schedules;
 
     public ScheduleJSONConverter(String jsonString) {
         this.jsonString = jsonString;
     }
 
-    public void execute(){
-        try{
+    public void execute() {
+        try {
             MyConstant myConstant = new MyConstant();
             JSONArray jsonArray = new JSONArray(jsonString);
-            //medicines = new Medicine[jsonArray.length()];
-            for (int i=0;i<jsonArray.length();i++) {
+            schedules = new Schedule[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String nameString = jsonObject.getString("med_name");
-                String idString = jsonObject.getString("med_id");
-                String brandString = jsonObject.getString("med_brand");
-                String charactorString = jsonObject.getString("med_charactor");
-                String dosString = jsonObject.getString("med_dos");
-                String numberString = jsonObject.getString("med_number");
-                String descString = jsonObject.getString("med_desc");
-                String imageString = jsonObject.getString("med_image");
-                String affectString = jsonObject.getString("med_affect");
-
-                if (imageString.length() > 3) {
-                    imageString = myConstant.getUrlUpload() + imageString;
-                }
-
-                //medicines[i] = new Medicine(idString, brandString, charactorString
-                //        , dosString, numberString, descString
-                //        , imageString, nameString, affectString);
-
-
+                String medBrandString = jsonObject.getString("med_brand");
+                String pMedIdString = jsonObject.getString("p_med_id");
+                String patientIdString = jsonObject.getString("patient_id");
+                String medIdString = jsonObject.getString("med_id");
+                String dosageString = jsonObject.getString("dosage");
+                String totalString = jsonObject.getString("total");
+                String startDateString = jsonObject.getString("start_date");
+                String endDateString = jsonObject.getString("end_date");
+                String snoozeString = jsonObject.getString("snooze");
+                String breakfastString = jsonObject.getString("breakfast");
+                String lunchString = jsonObject.getString("lunch");
+                String dinnerString = jsonObject.getString("dinner");
+                String historyString = jsonObject.getString("history");
+                schedules[i] = new Schedule(medBrandString, pMedIdString, patientIdString, medIdString, dosageString, totalString, startDateString, endDateString, snoozeString, breakfastString, lunchString, dinnerString, historyString);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Schedule[] getSchedules() {
+        return schedules;
     }
 
 }

@@ -78,4 +78,14 @@ public class NetpieIOHelper implements MicrogearEventListener {
         Log.i("exception", "Exception : " + error);
     }
 
+    @Override
+    public void onInfo(String info) {
+        Message msg = handler.obtainMessage();
+        Bundle bundle = new Bundle();
+        bundle.putString("myKey", "Exception : "+info);
+        msg.setData(bundle);
+        handler.sendMessage(msg);
+        Log.i("info","Info : "+info);
+    }
+
 }
