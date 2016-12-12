@@ -10,14 +10,12 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 
 
 public class MyNotificationService extends IntentService {
 
-    private String jsonString, medBrandString;
-    private int NOTIFICATION_ID = 1000;
-    private Notification notification;
+    private String jsonString, medBrandString, takeTimeString, medIdString;
 
     public MyNotificationService() {
         super("MyNotificationService");
@@ -28,46 +26,64 @@ public class MyNotificationService extends IntentService {
         if (intent != null) {
             jsonString = intent.getStringExtra("jsondata");
             medBrandString = intent.getStringExtra("medbrand");
-            //Log.d("31oct", jsonString);
+            medIdString = intent.getStringExtra("medid");
+            takeTimeString = intent.getStringExtra("taketime");
 
-            createNotification("hello");
+            createNotification();
             MyAlarmReceiver.completeWakefulIntent(intent);
         }
     }
 
-    private void createNotification(String message) {
+    private void createNotification() {
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         if (soundUri == null) {
             soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         }
-        String title = "ได้เวลาทานยา " + medBrandString +" แล้วค่ะ!";
-        String msg = "แตะเพื่อตอบว่าทานยาแล้ว!";
-        Intent yesIntent = new Intent(getApplicationContext(), ChatActivity.class);
-        yesIntent.setAction("YES");
-        yesIntent.putExtra("jsondata", jsonString);
 
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(MyNotificationService.this);
-        stackBuilder.addParentStack(ChatActivity.class);
-        stackBuilder.addNextIntent(yesIntent);
+        int menuTime = 0;
+        if(takeTimeString == "morning"){
+            menuTime = 1;
+        }else if(takeTimeString == "lunch"){
+            menuTime = 2;
+        }else if(takeTimeString == "evening"){
+            menuTime = 3;
+        }
 
-        PendingIntent contentIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        String a = medIdString + "" + String.valueOf(menuTime);
 
-        notification =
-            new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle(title)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                    .setContentText(msg)
-                    .setSound(soundUri)
-                    .setAutoCancel(true)
-                    .setContentIntent(contentIntent)
-                    .build();
+        Log.d("Alarm notify", a);
+
+        int NOTIFICATION_ID = Integer.parseInt(a);
+
+
+        String title = "ทานยาได้แล้วค่ะ! " + medIdString + ',' + a;
+        String msg = "แตะถ้าทานแล้ว!";
+
+        Intent intent = new Intent(getApplicationContext(), ScheduleReceiver.class);
+        intent.putExtra("jsondata", jsonString);
+        intent.putExtra("medid", medIdString);
+        intent.putExtra("taketime", takeTimeString);
+        intent.putExtra("notificationid", NOTIFICATION_ID);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent contentIntent = PendingIntent.getBroadcast(MyNotificationService.this, 0
+                , intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notification =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle(title)
+                        .setContentText(msg)
+                        .setSound(soundUri)
+                        .setContentIntent(contentIntent)
+                        .build();
+
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, notification);
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"My Tag");
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "My Tag");
         wl.acquire(10000);
         wl.release();
 

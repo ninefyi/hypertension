@@ -231,19 +231,6 @@ public class ChatActivity extends AppCompatActivity {
         }
     }//Inner class
 
-    //ScheduleTask
-    public class ScheduleTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
-
 
     public void refreshMessage(){
         try {
