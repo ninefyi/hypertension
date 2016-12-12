@@ -1,6 +1,8 @@
 package com.openworldtravels.www.hypertension;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +20,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+
+import java.util.Calendar;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -206,10 +210,31 @@ public class MainMenuActivity extends AppCompatActivity {
                 //Log.d("31oct", s);
                 if (s.length() > 4) {
                     String medString = s.trim();
+
                     Intent myServiceIntent = new Intent(MainMenuActivity.this, MyAlarmService.class);
                     myServiceIntent.putExtra("jsondata", jsonString);
                     myServiceIntent.putExtra("schedule", medString);
                     startService(myServiceIntent);
+
+                    /*
+                    Intent chatServiceIntent = new Intent(MainMenuActivity.this, ChatBackgroudService.class);
+                    chatServiceIntent.putExtra("jsondata", jsonString);
+                    chatServiceIntent.putExtra("schedule", medString);
+                    startService(chatServiceIntent);
+                    */
+
+                    Calendar calendar = Calendar.getInstance();
+                    Intent intent = new Intent(getApplicationContext(), ChatBackgroudService.class);
+                    intent.putExtra("jsondata", jsonString);
+                    intent.putExtra("schedule", medString);
+                    final PendingIntent pIntent = PendingIntent.getService(MainMenuActivity.this
+                            , 0
+                            , intent
+                            , PendingIntent.FLAG_UPDATE_CURRENT);
+                    AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                            calendar.getTimeInMillis(), 1000, pIntent);
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();

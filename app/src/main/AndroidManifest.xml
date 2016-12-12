@@ -11,8 +11,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
 
     <application
         android:allowBackup="true"
@@ -23,7 +25,6 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -33,7 +34,7 @@
         <activity android:name=".ServiceActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MedicineDetailActivity" />
-        <activity android:name=".ChatActivity" />
+        <activity android:name=".ChatActivity" android:launchMode="singleInstance" />
 
         <service
             android:name=".MyAlarmService"
@@ -55,8 +56,11 @@
         <receiver
             android:name=".ScheduleReceiver"
             android:enabled="true"
-            android:exported="true">
-        </receiver>
+            android:exported="true" />
+
+        <service
+            android:name=".ChatBackgroudService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

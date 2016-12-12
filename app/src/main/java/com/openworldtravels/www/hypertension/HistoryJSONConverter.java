@@ -23,13 +23,26 @@ public class HistoryJSONConverter {
             JSONArray jsonArray = new JSONArray(jsonString);
             historyTimes = new HistoryTime[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i++) {
+
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                 String pTakeMedIdString = jsonObject.getString("p_take_med_id");
                 String pMedIdString = jsonObject.getString("p_med_id");
                 String dateTakenString = jsonObject.getString("date_taken");
-                String breakfastString = jsonObject.getString("breakfast");
-                String lunchString = jsonObject.getString("lunch");
-                String dinnerString = jsonObject.getString("dinner");
+
+                String breakfastString = "";
+                if(!jsonObject.isNull("breakfast")){
+                    breakfastString = jsonObject.getString("breakfast");
+                }
+                String lunchString = "";
+                if(!jsonObject.isNull("lunch")){
+                    lunchString = jsonObject.getString("lunch");
+                }
+                String dinnerString = "";
+                if(!jsonObject.isNull("dinner")){
+                    dinnerString = jsonObject.getString("dinner");
+                }
+
                 String patientIdString = jsonObject.getString("patient_id");
 
                 historyTimes[i] = new HistoryTime(pTakeMedIdString, pMedIdString, dateTakenString, breakfastString, lunchString, dinnerString, patientIdString);

@@ -3,8 +3,6 @@ package com.openworldtravels.www.hypertension;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +40,7 @@ public class ChatActivity extends AppCompatActivity {
     private String appString, keyString, secretString;
     private String topicString = "patient";
 
+    /*
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -51,6 +50,15 @@ public class ChatActivity extends AppCompatActivity {
             Log.i("Message",string);
         }
     };
+    */
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Log.d("Alarm Chat Back", jsonString);
+        this.refreshMessage();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,20 +84,23 @@ public class ChatActivity extends AppCompatActivity {
         Button chatButton = (Button) findViewById(R.id.sendButton);
         editText = (EditText) findViewById(R.id.messageEditText);
 
+        /*
         final MyConstant myConstant = new MyConstant();
         appString = myConstant.getAppString();
         keyString = myConstant.getKeyString();
         secretString = myConstant.getSecretString();
 
         try {
-            NetpieIOHelper callback = new NetpieIOHelper(handler);
-            microgear.connect(appString, keyString, secretString);
-            microgear.setCallback(callback);
-            microgear.subscribe(topicString);
-            microgear.setalias("android" + patientJSONConverter.getIdString());
+            //NetpieIOHelper callback = new NetpieIOHelper(handler);
+            //microgear.connect(appString, keyString, secretString);
+            //microgear.setCallback(callback);
+            //microgear.subscribe(topicString);
+            //microgear.setalias("android" + patientJSONConverter.getIdString());
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        */
 
         refreshMessage();
 

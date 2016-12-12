@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -180,15 +181,15 @@ public class MyAlarmReceiver extends WakefulBroadcastReceiver {
                 String historyMedId = historyTimes[i].getpMedIdString();
                 if (medId.equals(historyMedId)) {
                     if (takeTime == "morning") {
-                        if (historyTimes[i].getBreakfastString().equals("") == false) {
+                        if (!TextUtils.isEmpty(historyTimes[i].getBreakfastString())) {
                             notify = false;
                         }
                     } else if (takeTime == "lunch") {
-                        if (historyTimes[i].getLunchString().equals("") == false) {
+                        if (!TextUtils.isEmpty(historyTimes[i].getLunchString())) {
                             notify = false;
                         }
-                    } else if (takeTime == "evening") {
-                        if (historyTimes[i].getDinnerString().equals("") == false) {
+                    } else if (takeTime.equals("evening")) {
+                        if(!TextUtils.isEmpty(historyTimes[i].getDinnerString())){
                             notify = false;
                         }
                     }
