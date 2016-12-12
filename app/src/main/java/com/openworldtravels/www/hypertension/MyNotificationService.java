@@ -64,9 +64,9 @@ public class MyNotificationService extends IntentService {
         intent.putExtra("medid", medIdString);
         intent.putExtra("taketime", takeTimeString);
         intent.putExtra("notificationid", NOTIFICATION_ID);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        PendingIntent contentIntent = PendingIntent.getBroadcast(MyNotificationService.this, 0
+        PendingIntent contentIntent = PendingIntent.getBroadcast(MyNotificationService.this, NOTIFICATION_ID
                 , intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification =
