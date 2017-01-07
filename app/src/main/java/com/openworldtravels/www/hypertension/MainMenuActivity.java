@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -191,7 +192,6 @@ public class MainMenuActivity extends AppCompatActivity {
                         .add("patient", idString)
                         .add("op", "take_med")
                         .build();
-
                 Request.Builder builder = new Request.Builder();
                 Request request = builder.url(strings[0]).post(requestBody).build();
                 Response response = okHttpClient.newCall(request).execute();
@@ -207,7 +207,7 @@ public class MainMenuActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
-                //Log.d("31oct", s);
+                Log.d("Alarm MainMenu", s);
                 if (s.length() > 4) {
                     String medString = s.trim();
 

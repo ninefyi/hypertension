@@ -37,8 +37,10 @@ public class ChatActivity extends AppCompatActivity {
     private String messageString;
     private ListView listView;
     private final Microgear microgear = new Microgear(ChatActivity.this);
-    private String appString, keyString, secretString;
+    //private String appString, keyString, secretString;
     private String topicString = "patient";
+    SendMessageTask sendMessageTask;
+    LoadMessageTask loadMessageTask;
 
     /*
     Handler handler = new Handler() {
@@ -75,7 +77,7 @@ public class ChatActivity extends AppCompatActivity {
             if (actionString.equals("YES")) {
                 //Log.d("Notificaiton", jsonString);
                 messageString = "ทานเรียบร้อยแล้ว^^";
-                SendMessageTask sendMessageTask = new SendMessageTask(ChatActivity.this);
+                sendMessageTask = new SendMessageTask(ChatActivity.this);
                 sendMessageTask.execute(myConstant.getUrlAPI());
             }
         }
@@ -112,7 +114,7 @@ public class ChatActivity extends AppCompatActivity {
                 } else {
 
                     messageString = editText.getText().toString().trim();
-                    SendMessageTask sendMessageTask = new SendMessageTask(ChatActivity.this);
+                    sendMessageTask = new SendMessageTask(ChatActivity.this);
                     sendMessageTask.execute(myConstant.getUrlAPI());
 
                 }// if
@@ -144,7 +146,7 @@ public class ChatActivity extends AppCompatActivity {
                         .add("op", "save_msg")
                         .build();
                 //Log.d("24oct", messageString);
-
+                Log.d("Alarm send message", messageString);
                 Request.Builder builder = new Request.Builder();
                 Request request = builder.url(strings[0]).post(requestBody).build();
                 Response response = okHttpClient.newCall(request).execute();
@@ -199,7 +201,7 @@ public class ChatActivity extends AppCompatActivity {
                         .add("patient", patientJSONConverter.getIdString())
                         .add("op", "get_msg")
                         .build();
-
+                Log.d("Alarm Load Message", patientJSONConverter.getIdString());
                 Request.Builder builder = new Request.Builder();
                 Request request = builder.url(strings[0]).post(requestBody).build();
                 Response response = okHttpClient.newCall(request).execute();
@@ -215,7 +217,7 @@ public class ChatActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
-                //Log.d("24oct", s);
+                Log.d("Alarm result load msg", s);
                 if (s.length() > 4) {
                     List<ChatMessage> chatMessages = new ArrayList<>();
                     JSONArray jsonArray = new JSONArray(s);
@@ -245,7 +247,8 @@ public class ChatActivity extends AppCompatActivity {
 
     public void refreshMessage(){
         try {
-            LoadMessageTask loadMessageTask = new LoadMessageTask(ChatActivity.this);
+            Log.d("Alarm refresh message", myConstant.getUrlAPI());
+            loadMessageTask = new LoadMessageTask(ChatActivity.this);
             loadMessageTask.execute(myConstant.getUrlAPI());
         } catch (Exception e) {
             e.printStackTrace();

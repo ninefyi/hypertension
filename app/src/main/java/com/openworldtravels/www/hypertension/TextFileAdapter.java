@@ -28,10 +28,11 @@ public class TextFileAdapter {
     public Boolean write(String dataString) {
         FileOutputStream outputStream;
         try {
+
             outputStream = context.openFileOutput(fileString, Context.MODE_PRIVATE);
             outputStream.write(dataString.getBytes());
             outputStream.close();
-            Log.d("HT", dataString);
+            Log.d("Alarm HT", dataString);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,7 +49,7 @@ public class TextFileAdapter {
             while ((line = r.readLine()) != null) {
                 total.append(line).append('\n');
             }
-            Log.d("HT", total.toString());
+            Log.d("Alarm HT", total.toString());
             return total.toString();
 
         } catch (Exception e) {

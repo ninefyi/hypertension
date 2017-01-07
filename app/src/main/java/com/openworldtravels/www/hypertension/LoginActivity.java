@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -98,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                         .build();
 
                 Request.Builder builder = new Request.Builder();
-                //Log.d("12Nov", strings[0]);
+                Log.d("Alarm Log-in", strings[0]);
                 Request request = builder.url(strings[0]).post(requestBody).build();
                 Response response = okHttpClient.newCall(request).execute();
                 if (!response.isSuccessful())

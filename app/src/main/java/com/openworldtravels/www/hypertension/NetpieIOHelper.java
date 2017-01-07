@@ -25,7 +25,7 @@ public class NetpieIOHelper implements MicrogearEventListener {
         bundle.putString("myKey", "Now I'm connected with netpie");
         msg.setData(bundle);
         handler.sendMessage(msg);
-        Log.i("Connected", "Now I'm connected with netpie");
+        Log.d("Alarm Connected", "Now I'm connected with netpie");
     }
 
     @Override
@@ -35,7 +35,7 @@ public class NetpieIOHelper implements MicrogearEventListener {
         bundle.putString("myKey", topic + " : " + message);
         msg.setData(bundle);
         handler.sendMessage(msg);
-        Log.i("Message", topic + " : " + message);
+        Log.d("Alarm Message", topic + " : " + message);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class NetpieIOHelper implements MicrogearEventListener {
         bundle.putString("myKey", "New friend Connect :" + token);
         msg.setData(bundle);
         handler.sendMessage(msg);
-        Log.i("present", "New friend Connect :" + token);
+        Log.d("Alarm present", "New friend Connect :" + token);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class NetpieIOHelper implements MicrogearEventListener {
         bundle.putString("myKey", "Friend lost :" + token);
         msg.setData(bundle);
         handler.sendMessage(msg);
-        Log.i("absent", "Friend lost :" + token);
+        Log.d("Alarm absent", "Friend lost :" + token);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class NetpieIOHelper implements MicrogearEventListener {
         bundle.putString("myKey", "Disconnected");
         msg.setData(bundle);
         handler.sendMessage(msg);
-        Log.i("disconnect", "Disconnected");
+        Log.d("Alarm disconnect", "Disconnected");
     }
 
     @Override
@@ -75,7 +75,7 @@ public class NetpieIOHelper implements MicrogearEventListener {
         bundle.putString("myKey", "Exception : " + error);
         msg.setData(bundle);
         handler.sendMessage(msg);
-        Log.i("exception", "Exception : " + error);
+        Log.d("exception", "Exception : " + error);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class NetpieIOHelper implements MicrogearEventListener {
         bundle.putString("myKey", "Exception : "+info);
         msg.setData(bundle);
         handler.sendMessage(msg);
-        Log.i("info","Info : "+info);
+        Log.d("Alarm info","Info : "+info);
     }
 
 }

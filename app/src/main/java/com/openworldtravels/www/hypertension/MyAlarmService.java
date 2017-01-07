@@ -5,6 +5,7 @@ import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -22,7 +23,7 @@ public class MyAlarmService extends IntentService {
         if (intent != null) {
             jsonString = intent.getStringExtra("jsondata");
             scheduleString = intent.getStringExtra("schedule");
-            //Log.d("Alarm Schedule:", scheduleString);
+            Log.d("Alarm Schedule:", scheduleString);
             setScheduleAlarm();
         }
     }
@@ -38,7 +39,7 @@ public class MyAlarmService extends IntentService {
                                     , PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), 1*60*1000, pIntent);
+                calendar.getTimeInMillis(), 60*1000, pIntent);
     }
 
 

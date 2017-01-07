@@ -62,9 +62,11 @@ public class ChatBackgroudService extends IntentService {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
                 List<ActivityManager.AppTask> appTaskList = am.getAppTasks();
                 for (ActivityManager.AppTask appTask : appTaskList) {
-                    String s = appTask.getTaskInfo().topActivity.getClassName();
-                    if (s != null && s.indexOf("ChatActivity") > 1) {
-                        return appTask.getTaskInfo().topActivity;
+                    if(appTask.getTaskInfo().topActivity != null){
+                        String s = appTask.getTaskInfo().topActivity.getClassName();
+                        if (s != null && s.indexOf("ChatActivity") > 1) {
+                            return appTask.getTaskInfo().topActivity;
+                        }
                     }
                 }
             }
@@ -90,7 +92,9 @@ public class ChatBackgroudService extends IntentService {
                 microgear.connect(appString, keyString, secretString);
                 microgear.setCallback(callback);
                 microgear.subscribe(topicString);
-                microgear.setalias("android" + patientJSONConverter.getIdString());
+                microgear.setalias("htandroid" + patientJSONConverter.getIdString());
+
+                Log.d("Alarm Chat Service", appString);
 
 
             } catch (Exception e) {

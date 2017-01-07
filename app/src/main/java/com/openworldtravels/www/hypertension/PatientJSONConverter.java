@@ -113,7 +113,11 @@ public class PatientJSONConverter {
     }
 
     public String getBreakfastString() {
-        return convertToTimePattern(this.breakfastString);
+        if(this.breakfastString != null){
+            return convertToTimePattern(this.breakfastString);
+        }else {
+            return "";
+        }
     }
 
     public void setBreakfastString(String breakfastString) {
@@ -121,7 +125,11 @@ public class PatientJSONConverter {
     }
 
     public String getLunchString() {
-        return convertToTimePattern(this.lunchString);
+        if(this.lunchString != null){
+            return convertToTimePattern(this.lunchString);
+        }else{
+            return "";
+        }
     }
 
     public void setLunchString(String lunchString) {
@@ -129,7 +137,12 @@ public class PatientJSONConverter {
     }
 
     public String getDinnerString() {
-        return convertToTimePattern(this.dinnerString);
+        if(this.dinnerString != null) {
+            return convertToTimePattern(this.dinnerString);
+        }else{
+            return "";
+        }
+
     }
 
     public void setDinnerString(String dinnerString) {
